@@ -1,0 +1,42 @@
+.GoodsList
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.GoodsList .ListCaption
+{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.GoodsList .TableHeader
+{
+    background: rgb(199, 71, 71);
+    padding: 10px 20px;
+    border-color: black;
+    color: rgb(39, 38, 38);
+
+}
+
+.GoodsList .TableHeader, .GoodsList .GoodItem
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    width: 100px;
+}
+
+.GoodsList .GoodItem
+{
+    background: white;
+}
+
+.GoodsList .GoodItem .GoodImage
+{
+  width: 200px;
+}
+
