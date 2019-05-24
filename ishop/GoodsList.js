@@ -16,11 +16,8 @@ var GoodsList = React.createClass({
     ),
     tableHeaders: React.PropTypes.arrayOf(
       React.PropTypes.shape({
-        headerCode: React.PropTypes.number.isRequired,
-        headerName: React.PropTypes.string.isRequired,
-        headerCost: React.PropTypes.string.isRequired,
-        headerPicture: React.PropTypes.string.isRequired,
-        headerNumbers: React.PropTypes.string.isRequired
+        id: React.PropTypes.number.isRequired,
+        name: React.PropTypes.string.isRequired
       })
     )
   },
@@ -38,17 +35,14 @@ var GoodsList = React.createClass({
       )
     );
     var headers = this.props.tableHeaders.map(header =>
-      React.DOM.tr({ key: header.headerCode },
-        React.DOM.th({ className: 'TableHeader' }, header.headerName),
-        React.DOM.th({ className: 'TableHeader' }, header.headerCost),
-        React.DOM.th({ className: 'TableHeader' }, header.headerPicture),
-        React.DOM.th({ className: 'TableHeader' }, header.headerNumbers),
-      )
+      React.DOM.th({ key: header.id, className: 'TableHeader' }, header.name)
     );
 
     return React.DOM.table({ className: 'GoodsList' },
       React.DOM.caption({ className: 'ListCaption' }, this.props.tableName),
-      React.DOM.thead({}, headers),
+      React.DOM.thead({}, 
+        React.DOM.tr({}, headers)
+      ),
       React.DOM.tbody({}, goods)
     );
   },
