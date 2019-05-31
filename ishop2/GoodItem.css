@@ -1,0 +1,30 @@
+.GoodsList .GoodRow
+{
+    background:white;
+}
+
+.GoodsList .GoodItem
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    width: 100px;
+}
+
+.GoodsList .GoodRowSelected
+{
+    background:rgb(179, 96, 96);
+}
+
+.GoodsList .GoodItem .GoodImage
+{
+  width: 100px;
+}
+
+.GoodsList .DeleteInput 
+{
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+}
+

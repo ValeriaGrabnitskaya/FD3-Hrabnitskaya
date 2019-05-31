@@ -1,0 +1,33 @@
+.GoodsList
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.GoodsList .ListCaption
+{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.GoodsList .TableHeader
+{
+    background: lightblue;
+    padding: 10px 20px;
+    border-color: black;
+    color: rgb(39, 38, 38);
+
+}
+
+.GoodsList .TableHeader
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    width: 100px;
+}
+
+
