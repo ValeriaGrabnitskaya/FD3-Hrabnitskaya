@@ -15,13 +15,17 @@ class GoodsList extends React.Component {
             goodsArray: props.goodsArray,
             selectedCode: null,
             selectedGood: null,
-            detailMode: null
+            detailMode: null,
+            isFromChanged: false,
+            editGood: null
         };
     }
 
     rowSelected = (code) => {
-        let selectedGood = this.state.goodsArray.filter(good => good.code === code)[0];
-        this.setState({ selectedCode: code, selectedGood: selectedGood, detailMode: modes.view })
+        if (!this.state.isFromChanged) {
+            let selectedGood = this.state.goodsArray.filter(good => good.code === code)[0];
+            this.setState({ selectedCode: code, selectedGood: selectedGood, detailMode: modes.view })
+        }
     }
 
     deleteRow = (code) => {
@@ -32,8 +36,25 @@ class GoodsList extends React.Component {
         }
     }
 
+    editRow = (editGood) => {
+        this.setState({ editGood: editGood, detailMode: modes.edit, selectedCode: null })
+    }
+
+    formChanged = () => {
+        this.setState({ isFromChanged: true })
+    }
+
     addGood = () => {
-        this.setState({ detailMode: modes.add })
+        this.setState({ detailMode: modes.add, selectedCode: null })
+    }
+
+    saveGood = (newGood) => {
+        let newGoodsArray = this.state.goodsArray.concat(newGood);
+        this.setState({ goodsArray: newGoodsArray, detailMode: modes.none })
+    }
+
+    cancelGood = () => {
+        this.setState({ detailMode: modes.none })
     }
 
     render() {
@@ -45,28 +66,36 @@ class GoodsList extends React.Component {
                 key={good.code}
                 good={good}
                 rowWasSelected={this.rowSelected}
-                isSelected={this.state.selectedCode === good.code ? true : false}
-                deleteSelecredRow={this.deleteRow}
+                isSelected={this.state.selectedCode === good.code && !this.state.isFromChanged ? true : false}
+                deleteSelectedRow={this.deleteRow}
+                editSelectedRow={this.editRow}
             />
         );
 
         return (
-            <div className="Container">
+            <React.Fragment>
                 <table className='GoodsList'>
                     <caption className='ListCaption'>{this.props.tableName}</caption>
                     <thead><tr>{headers}</tr></thead>
                     <tbody>{goods}</tbody>
                 </table>
-                <input className='AddButton' type='button' value='Add good' onClick={this.addGood} />
-                {
-                    (this.state.detailMode === modes.view) &&
-                    <ViewGood good={this.state.selectedGood} />
-                }
-                {
-                    (this.state.detailMode === modes.add) &&
-                    <AddEditGood />
-                }
-            </div>
+                <div>
+                    {
+                        (this.state.detailMode !== modes.add) &&
+                        <input className='AddButton' type='button' value='Add good' onClick={this.addGood} />
+                    }
+                </div>
+                <div>
+                    {
+                        (this.state.detailMode === modes.view) &&
+                        <ViewGood good={this.state.selectedGood} />
+                    }
+                    {
+                        (this.state.detailMode === modes.add || this.state.detailMode === modes.edit) &&
+                        <AddEditGood selectedGood={this.state.editGood} mode={this.state.detailMode} saveGood={this.saveGood} cancelGood={this.cancelGood} formChanged={this.formChanged} />
+                    }
+                </div>
+            </React.Fragment>
         )
     }
 }

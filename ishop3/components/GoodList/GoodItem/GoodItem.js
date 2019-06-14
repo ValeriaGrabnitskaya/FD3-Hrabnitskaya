@@ -10,10 +10,15 @@ class GoodItem extends React.Component {
     this.props.rowWasSelected(good.code)
   }
 
-  deleteRow = (e) => {
+  onEditRow = (e) => {
+    e.stopPropagation();
+    this.props.editSelectedRow(this.props.good)
+  }
+
+  onDeleteRow = (e) => {
     const good = this.props.good;
     e.stopPropagation();
-    this.props.deleteSelecredRow(good.code)
+    this.props.deleteSelectedRow(good.code)
   }
 
   render() {
@@ -25,7 +30,8 @@ class GoodItem extends React.Component {
         <td className='GoodItem'>{good.goodUrl}</td>
         <td className='GoodItem'>{good.numbers}</td>
         <td className='GoodItem'>
-          <input type='button' className='DeleteInput' value='Delete' onClick={this.deleteRow}/>
+          <input type='button' className='Input' value='Edit' onClick={this.onEditRow}/>
+          <input type='button' className='Input' value='Delete' onClick={this.onDeleteRow}/>
         </td>
       </tr>
     )
@@ -46,7 +52,8 @@ GoodItem.propTypes = {
   good: PropTypes.object.isRequired,
   rowWasSelected: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
-  deleteSelecredRow: PropTypes.func.isRequired
+  deleteSelectedRow: PropTypes.func.isRequired,
+  editSelectedRow: PropTypes.func.isRequired
 }
 
 export default GoodItem;

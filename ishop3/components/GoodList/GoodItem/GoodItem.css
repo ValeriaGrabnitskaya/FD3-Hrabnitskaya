@@ -8,7 +8,7 @@
     border-style: solid;
     border-width: 1px;
     border-color: black;
-    width: 100px;
+    width: 200px;
 }
 
 .GoodsList .GoodRowSelected
@@ -16,7 +16,7 @@
     background:rgb(179, 96, 96);
 }
 
-.GoodsList .DeleteInput 
+.GoodsList .Input 
 {
     width: 80px;
     height: 30px;

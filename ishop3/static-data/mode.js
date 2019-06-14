@@ -1,7 +1,8 @@
 const modes = {
-    add: 0,
-    edit: 1,
-    view: 2
+    add: 1,
+    edit: 2,
+    view: 3,
+    none: 0
 }
 
 export default modes;

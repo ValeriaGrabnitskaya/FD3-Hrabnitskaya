@@ -1,23 +1,20 @@
-.Container
-{
-}
-
-.Container .GoodsList
+.GoodsList
 {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 14px;
     border-collapse: collapse;
     text-align: center;
     margin: 0 auto;
+    margin-bottom: 20px;
 }
 
-.Container .GoodsList .ListCaption
+.GoodsList .ListCaption
 {
     font-weight: bold;
     font-size: 20px;
 }
 
-.Container .GoodsList .TableHeader
+.GoodsList .TableHeader
 {
     background: lightblue;
     padding: 10px 20px;
@@ -26,7 +23,7 @@
 
 }
 
-.Container .GoodsList .TableHeader
+.GoodsList .TableHeader
 {
     border-style: solid;
     border-width: 1px;
@@ -34,14 +31,13 @@
     width: 100px;
 }
 
-.Container .AddButton
+.AddButton
 {
     text-align: center;
-    margin-left: 410px;
-    margin-top: 20px;
     width: 100px;
     height: 40px;
     font-size: 14px;
+    margin-left: 29%;
 }
 
 
