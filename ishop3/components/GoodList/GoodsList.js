@@ -17,7 +17,8 @@ class GoodsList extends React.Component {
             selectedGood: null,
             detailMode: null,
             isFromChanged: false,
-            editGood: null
+            editGood: null,
+            uniqueCode: 5
         };
     }
 
@@ -45,12 +46,29 @@ class GoodsList extends React.Component {
     }
 
     addGood = () => {
-        this.setState({ detailMode: modes.add, selectedCode: null })
+        this.setState({
+            editGood: { code: this.state.uniqueCode },
+            detailMode: modes.add,
+            selectedCode: null,
+            uniqueCode: this.state.uniqueCode + 1
+        })
     }
 
     saveGood = (newGood) => {
-        let newGoodsArray = this.state.goodsArray.concat(newGood);
+        let newGoodsArray;
+        if (this.state.detailMode === modes.edit) {
+            newGoodsArray = this.state.goodsArray.map(good => {
+                if (good.code === newGood.code) {
+                    good = newGood
+                }
+                return good
+            })
+        }
+        if (this.state.detailMode === modes.add) {
+            newGoodsArray = this.state.goodsArray.concat(newGood);
+        }
         this.setState({ goodsArray: newGoodsArray, detailMode: modes.none })
+
     }
 
     cancelGood = () => {
@@ -91,8 +109,16 @@ class GoodsList extends React.Component {
                         <ViewGood good={this.state.selectedGood} />
                     }
                     {
-                        (this.state.detailMode === modes.add || this.state.detailMode === modes.edit) &&
-                        <AddEditGood selectedGood={this.state.editGood} mode={this.state.detailMode} saveGood={this.saveGood} cancelGood={this.cancelGood} formChanged={this.formChanged} />
+                        (this.state.detailMode === modes.edit || this.state.detailMode === modes.add) &&
+                        <AddEditGood
+                            key={this.state.editGood.code}
+                            selectedGood={this.state.editGood}
+                            initialGoodName={this.state.editGood.name}
+                            mode={this.state.detailMode}
+                            saveGood={this.saveGood}
+                            cancelGood={this.cancelGood}
+                            formChanged={this.formChanged}
+                        />
                     }
                 </div>
             </React.Fragment>

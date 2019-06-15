@@ -3,19 +3,52 @@
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 14px;
     text-align: center;
-    margin: 0 auto;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 40px;
 }
 
-.Button 
+.GoodBlock .InputBlock 
 {
-    text-align: center;
-    width: 70px;
-    height: 20px;
-    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    text-align: left;
 }
 
-.FirstChild
+.GoodBlock .BlockLabels
 {
-    margin-left: 39%;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.GoodBlock .BlockInput 
+{
+    padding: 6px;
+    margin-top: 6px;
+    width: 50%;
+    margin-left: 3%;
+}
+
+.GoodBlock .BlockMessage
+{
+    margin-left: 3%;
+    color: red;
+}
+
+.ButtonBlock 
+{
+    text-align: center;
+}
+.Button 
+{
+    background: rgb(31, 68, 148);
+    border: 0;
+    color:white;
+    cursor: pointer;
+    padding: 8px 16px;
+    width: 70px;
+    margin-right: 40px;
 }

@@ -2,22 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './AddEditGood.css';
+import modes from '../../static-data/mode';
 
 class AddEditGood extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(props.selectedGood)
+
+        let isEditMode = props.mode === modes.edit;
+
         this.state = {
-            code: props.selectedGood ? props.selectedGood.code : 5,
-            link: '',
-            name: '',
-            cost: 0,
-            numbers: 0,
-            isLinkValid: false,
-            isNameValid: false,
-            isCostValid: false,
-            isNumbersValid: false
+            initialEditName: props.selectedGood.name,
+            code: props.selectedGood.code,
+            link: isEditMode ? props.selectedGood.goodUrl : '',
+            name: isEditMode ? props.selectedGood.name : '',
+            cost: isEditMode ? props.selectedGood.cost : 0,
+            numbers: isEditMode ? props.selectedGood.numbers : 0,
+            isLinkValid: isEditMode,
+            isNameValid: isEditMode,
+            isCostValid: isEditMode,
+            isNumbersValid: isEditMode
         }
     }
 
@@ -62,16 +66,46 @@ class AddEditGood extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className='GoodBlock'>
-                    <p>Code: {this.state.code}</p>
-                    <p>Link: <input type='text' value={this.state.link} onChange={this.onLinkChanged} /> {(!this.state.isLinkValid) && <span>Field is required</span>}</p>
-                    <p>Name: <input type='text' value={this.state.name} onChange={this.onNameChanged} /> {(!this.state.isNameValid) && <span>Field is required</span>}</p>
-                    <p>Cost: <input type='number' value={this.state.cost} onChange={this.onCostChanged} /> {(!this.state.isCostValid) && <span>Field is required</span>}</p>
-                    <p>Numbers: <input type='number' value={this.state.numbers} onChange={this.onNumbersChanged} /> {(!this.state.isNumbersValid) && <span>Field is required</span>}</p>
+            <div className='GoodBlock'>
+                {
+                    (this.props.mode === modes.add) && <h1>Add new good</h1>
+                }
+                {
+                    (this.props.mode === modes.edit) && <h1>Edit {this.props.initialGoodName}</h1>
+                }
+                <div className='InputBlock'>
+                    <label className='BlockLabels'>
+                        Code:
+                            <span className='BlockInput'>{this.state.code}</span>
+                    </label>
+                    <label className='BlockLabels'>
+                        Link:
+                            <input className='BlockInput' type='text' value={this.state.link} onChange={this.onLinkChanged} />
+                        {(!this.state.isLinkValid) && <span className='BlockMessage'>Field is required</span>}
+                    </label>
+                    <label className='BlockLabels'>
+                        Name:
+                            <input className='BlockInput' type='text' value={this.state.name} onChange={this.onNameChanged} />
+                        {(!this.state.isNameValid) && <span className='BlockMessage'>Field is required</span>}
+                    </label>
+                    <label className='BlockLabels'>
+                        Cost:
+                            <input className='BlockInput' type='text' value={this.state.cost} onChange={this.onCostChanged} />
+                        {(!this.state.isCostValid) && <span className='BlockMessage'>Field is required</span>}
+                    </label>
+                    <label className='BlockLabels'>
+                        Numbers:
+                            <input className='BlockInput' type='text' value={this.state.numbers} onChange={this.onNumbersChanged} />
+                        {(!this.state.isNumbersValid) && <span className='BlockMessage'>Field is required</span>}
+                    </label>
                 </div>
-                <div>
-                    <input className='Button FirstChild' type='button' value='Save' onClick={this.onSaveGood} />
+                <div className='ButtonBlock'>
+                    <input
+                        className='Button'
+                        type='button'
+                        value='Save'
+                        disabled={!this.state.isLinkValid || !this.state.isNameValid || !this.state.isCostValid || !this.state.isNumbersValid}
+                        onClick={this.onSaveGood} />
                     <input className='Button' type='button' value='Cancel' onClick={this.onCancelSave} />
                 </div>
             </div>
@@ -85,7 +119,7 @@ AddEditGood.propTypes = {
     saveGood: PropTypes.func.isRequired,
     cancelGood: PropTypes.func.isRequired,
     formChanged: PropTypes.func.isRequired,
-    selectedGood: PropTypes.object
+    initialGoodName: PropTypes.string
 }
 
 export default AddEditGood;
