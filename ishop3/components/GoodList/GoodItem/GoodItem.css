@@ -20,6 +20,21 @@
 {
     width: 80px;
     height: 30px;
-    font-size: 14px;
+    background: rgb(31, 68, 148);
+    border: 0;
+    color:white;
+    cursor: pointer;
+    margin-right: 5px;    
+}
+
+.GoodsList .Disable 
+{
+    width: 80px;
+    height: 30px;
+    background: rgb(118, 126, 143);
+    border: 0;
+    color:white;
+    cursor: pointer;
+    margin-right: 5px;    
 }
 

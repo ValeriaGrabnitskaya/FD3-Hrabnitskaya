@@ -65,6 +65,7 @@ class AddEditGood extends React.Component {
     }
 
     render() {
+        let isDisable = !this.state.isLinkValid || !this.state.isNameValid || !this.state.isCostValid || !this.state.isNumbersValid;
         return (
             <div className='GoodBlock'>
                 {
@@ -101,10 +102,10 @@ class AddEditGood extends React.Component {
                 </div>
                 <div className='ButtonBlock'>
                     <input
-                        className='Button'
+                        className={isDisable ? 'Disable' : 'Button'}
                         type='button'
                         value='Save'
-                        disabled={!this.state.isLinkValid || !this.state.isNameValid || !this.state.isCostValid || !this.state.isNumbersValid}
+                        disabled={isDisable}
                         onClick={this.onSaveGood} />
                     <input className='Button' type='button' value='Cancel' onClick={this.onCancelSave} />
                 </div>

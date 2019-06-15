@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './GoodItem.css';
 
 class GoodItem extends React.Component {
-  
+
   rowSelected = () => {
     const good = this.props.good;
     this.props.rowWasSelected(good.code)
@@ -30,8 +30,8 @@ class GoodItem extends React.Component {
         <td className='GoodItem'>{good.goodUrl}</td>
         <td className='GoodItem'>{good.numbers}</td>
         <td className='GoodItem'>
-          <input type='button' className='Input' value='Edit' onClick={this.onEditRow}/>
-          <input type='button' className='Input' value='Delete' onClick={this.onDeleteRow}/>
+          <input type='button' disabled={this.props.isFromChanged} className={this.props.isFromChanged ? 'Disable' : 'Input'} value='Edit' onClick={this.onEditRow} />
+          <input type='button' disabled={this.props.isFromChanged} className={this.props.isFromChanged ? 'Disable' : 'Input'} value='Delete' onClick={this.onDeleteRow} />
         </td>
       </tr>
     )
@@ -53,7 +53,8 @@ GoodItem.propTypes = {
   rowWasSelected: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
   deleteSelectedRow: PropTypes.func.isRequired,
-  editSelectedRow: PropTypes.func.isRequired
+  editSelectedRow: PropTypes.func.isRequired,
+  isFromChanged: PropTypes.bool.isRequired
 }
 
 export default GoodItem;

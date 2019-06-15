@@ -18,7 +18,8 @@ class GoodsList extends React.Component {
             detailMode: null,
             isFromChanged: false,
             editGood: null,
-            uniqueCode: 5
+            uniqueCode: 5,
+            isDisableBtn: false
         };
     }
 
@@ -43,6 +44,10 @@ class GoodsList extends React.Component {
 
     formChanged = () => {
         this.setState({ isFromChanged: true })
+    }
+
+    disableBtn = (isDisableBtn) => {
+        this.setState({ isDisableBtn: isDisableBtn })
     }
 
     addGood = () => {
@@ -87,6 +92,7 @@ class GoodsList extends React.Component {
                 isSelected={this.state.selectedCode === good.code && !this.state.isFromChanged ? true : false}
                 deleteSelectedRow={this.deleteRow}
                 editSelectedRow={this.editRow}
+                isFromChanged={this.state.isFromChanged}
             />
         );
 
