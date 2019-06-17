@@ -40,4 +40,10 @@
     margin-left: 29%;
 }
 
+.AddButton:disabled
+{
+    background: rgb(118, 126, 143);
+}
+
+
 

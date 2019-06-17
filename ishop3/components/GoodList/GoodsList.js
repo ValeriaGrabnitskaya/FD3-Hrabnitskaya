@@ -39,7 +39,7 @@ class GoodsList extends React.Component {
     }
 
     editRow = (editGood) => {
-        this.setState({ editGood: editGood, detailMode: modes.edit, selectedCode: null })
+        this.setState({ editGood: editGood, detailMode: modes.edit, selectedCode: editGood.code })
     }
 
     formChanged = () => {
@@ -77,7 +77,7 @@ class GoodsList extends React.Component {
     }
 
     cancelGood = () => {
-        this.setState({ detailMode: modes.none })
+        this.setState({ detailMode: modes.none, isFromChanged: false })
     }
 
     render() {
@@ -89,10 +89,11 @@ class GoodsList extends React.Component {
                 key={good.code}
                 good={good}
                 rowWasSelected={this.rowSelected}
-                isSelected={this.state.selectedCode === good.code && !this.state.isFromChanged ? true : false}
+                isSelected={this.state.selectedCode === good.code ? true : false}
                 deleteSelectedRow={this.deleteRow}
                 editSelectedRow={this.editRow}
                 isFromChanged={this.state.isFromChanged}
+                selectedMode={this.state.detailMode}
             />
         );
 
@@ -107,9 +108,13 @@ class GoodsList extends React.Component {
                     <tbody>{goods}</tbody>
                 </table>
                 <div>
-                    <p>{this.state.detailMode}</p>
                     {
-                        <input className='AddButton' hidden={isAddMode || isEditMode} type='button' value='Add good' onClick={this.addGood} />
+                        <input 
+                        className='AddButton'
+                        disabled={isAddMode || isEditMode}
+                        type='button' 
+                        value='Add good' 
+                        onClick={this.addGood} />
                     }
                 </div>
                 <div>

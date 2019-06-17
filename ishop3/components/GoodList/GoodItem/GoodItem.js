@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './GoodItem.css';
+import modes from '../../../static-data/mode';
 
 class GoodItem extends React.Component {
 
@@ -21,17 +22,25 @@ class GoodItem extends React.Component {
     this.props.deleteSelectedRow(good.code)
   }
 
+  doNotClick = (e) => {
+    e.stopPropagation();
+  }
+
   render() {
     const good = this.props.good;
+
+    let isAddMode = this.props.selectedMode === modes.add;
+    let isEditMode = this.props.selectedMode === modes.edit;
+
     return (
-      <tr className={this.props.isSelected ? 'GoodRowSelected' : 'GoodRow'} onClick={this.rowSelected}>
+      <tr className={this.props.isSelected ? 'GoodRowSelected' : 'GoodRow'} onClick={isAddMode ? this.doNotClick : this.props.isFromChanged ? this.doNotClick : this.rowSelected}>
         <td className='GoodItem'>{good.name}</td>
         <td className='GoodItem'>{good.cost}</td>
         <td className='GoodItem'>{good.goodUrl}</td>
         <td className='GoodItem'>{good.numbers}</td>
         <td className='GoodItem'>
-          <input type='button' disabled={this.props.isFromChanged} className={this.props.isFromChanged ? 'Disable' : 'Input'} value='Edit' onClick={this.onEditRow} />
-          <input type='button' disabled={this.props.isFromChanged} className={this.props.isFromChanged ? 'Disable' : 'Input'} value='Delete' onClick={this.onDeleteRow} />
+          <input type='button' disabled={this.props.isFromChanged || isAddMode} className='Input' value='Edit' onClick={this.onEditRow} />
+          <input type='button' disabled={this.props.isFromChanged || isAddMode || isEditMode} className='Input' value='Delete' onClick={this.onDeleteRow} />
         </td>
       </tr>
     )
@@ -39,22 +48,13 @@ class GoodItem extends React.Component {
 }
 
 GoodItem.propTypes = {
-  // good: PropTypes.objectOf(
-  //   PropTypes.shape({
-  //     code: PropTypes.number.isRequired,
-  //     name: PropTypes.string.isRequired,
-  //     cost: PropTypes.number.isRequired,
-  //     goodUrl: PropTypes.string.isRequired,
-  //     pictureName: PropTypes.string.isRequired,
-  //     numbers: PropTypes.number.isRequired
-  //   })
-  // ).isRequired,
   good: PropTypes.object.isRequired,
   rowWasSelected: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
   deleteSelectedRow: PropTypes.func.isRequired,
   editSelectedRow: PropTypes.func.isRequired,
-  isFromChanged: PropTypes.bool.isRequired
+  isFromChanged: PropTypes.bool.isRequired,
+  selectedMode: PropTypes.number
 }
 
 export default GoodItem;

@@ -27,14 +27,8 @@
     margin-right: 5px;    
 }
 
-.GoodsList .Disable 
+.GoodsList .Input:disabled 
 {
-    width: 80px;
-    height: 30px;
     background: rgb(118, 126, 143);
-    border: 0;
-    color:white;
-    cursor: pointer;
-    margin-right: 5px;    
 }
 

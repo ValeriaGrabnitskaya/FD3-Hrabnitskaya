@@ -102,10 +102,10 @@ class AddEditGood extends React.Component {
                 </div>
                 <div className='ButtonBlock'>
                     <input
-                        className={isDisable ? 'Disable' : 'Button'}
+                        className='Button'
+                        disabled={isDisable}
                         type='button'
                         value='Save'
-                        disabled={isDisable}
                         onClick={this.onSaveGood} />
                     <input className='Button' type='button' value='Cancel' onClick={this.onCancelSave} />
                 </div>
