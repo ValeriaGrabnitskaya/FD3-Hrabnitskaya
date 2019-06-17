@@ -96,6 +96,9 @@ class GoodsList extends React.Component {
             />
         );
 
+        let isAddMode = this.state.detailMode === modes.add;
+        let isEditMode = this.state.detailMode === modes.edit;
+
         return (
             <React.Fragment>
                 <table className='GoodsList'>
@@ -104,9 +107,9 @@ class GoodsList extends React.Component {
                     <tbody>{goods}</tbody>
                 </table>
                 <div>
+                    <p>{this.state.detailMode}</p>
                     {
-                        (this.state.detailMode !== modes.add) &&
-                        <input className='AddButton' type='button' value='Add good' onClick={this.addGood} />
+                        <input className='AddButton' hidden={isAddMode || isEditMode} type='button' value='Add good' onClick={this.addGood} />
                     }
                 </div>
                 <div>
@@ -115,7 +118,7 @@ class GoodsList extends React.Component {
                         <ViewGood good={this.state.selectedGood} />
                     }
                     {
-                        (this.state.detailMode === modes.edit || this.state.detailMode === modes.add) &&
+                        (isAddMode || isEditMode) &&
                         <AddEditGood
                             key={this.state.editGood.code}
                             selectedGood={this.state.editGood}
