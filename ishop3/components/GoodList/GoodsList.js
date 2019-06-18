@@ -72,7 +72,7 @@ class GoodsList extends React.Component {
         if (this.state.detailMode === modes.add) {
             newGoodsArray = this.state.goodsArray.concat(newGood);
         }
-        this.setState({ goodsArray: newGoodsArray, detailMode: modes.none })
+        this.setState({ goodsArray: newGoodsArray, detailMode: modes.none, isFromChanged: false })
 
     }
 
