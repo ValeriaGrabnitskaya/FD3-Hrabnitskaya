@@ -1,0 +1,9 @@
+.Block
+{
+    width: 100px;
+    background-color: rgb(116, 1, 224);
+    text-align: center;
+    padding: 10px;
+    color: aliceblue;
+    font-size: 18px;
+}
