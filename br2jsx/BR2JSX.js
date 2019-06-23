@@ -8,11 +8,10 @@ const BR2JSX = (props) => {
     const textArray = props.text.match(/[а-я]+/g);
     const mas = [];
     textArray.forEach((element, i) => {
-        if (i + 1 === textArray.length) {
-            mas.push(element)
-        } else {
-            mas.push(element, <br key={i + 1} />)
+        if (i) {
+            mas.push(<br key={i} />);
         }
+        mas.push(element);
     });
     return (
         <div className='Block'>
