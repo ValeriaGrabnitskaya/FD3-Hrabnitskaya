@@ -25,16 +25,57 @@ class MobileCompany extends React.PureComponent {
 
     state = {
         clients: this.props.clients,
-        mode: null
+        mode: null,
+        editClient: null
     };
 
     componentDidMount = () => {
-
+        companyEvents.addListener('SaveClient', this.saveClient);
+        companyEvents.addListener('EditClient', this.editClient);
+        companyEvents.addListener('CancelSaveClient', this.cancelSaveClient);
+        companyEvents.addListener('DeleteClient', this.deleteClient);
     };
 
     componentWillUnmount = () => {
-
+        companyEvents.removeListener('SaveClient', this.saveClient);
+        companyEvents.removeListener('EditClient', this.editClient);
+        companyEvents.removeListener('CancelSaveClient', this.cancelSaveClient);
+        companyEvents.removeListener('DeleteClient', this.deleteClient);
     };
+
+    saveClient = (savedClient) => {
+        if (this.state.mode === modes.add) {
+            this.setState({ clients: [...this.state.clients, savedClient], mode: modes.none });
+        }
+        if (this.state.mode === modes.edit) {
+            let copiedClients = [...this.state.clients];
+            copiedClients.forEach((client, i) => {
+                if (client.id == savedClient.id) {
+                    copiedClients.splice(i, 1, savedClient)
+                }
+            });
+            this.setState({ clients: copiedClients, mode: modes.none });
+        }
+    }
+
+    editClient = (client) => {
+        let editClient = client;
+        this.setState({ mode: modes.edit, editClient: editClient });
+    }
+
+    cancelSaveClient = () => {
+        this.setState({ mode: modes.none, editClient: null })
+    }
+
+    deleteClient = (selectedId) => {
+        let copiedClients = [...this.state.clients];
+        copiedClients.forEach((client, i) => {
+            if (client.id == selectedId) {
+                copiedClients.splice(i, 1);
+            }
+        });
+        this.setState({ clients: copiedClients })
+    }
 
     getFilteredClients = (status) => {
         switch (status) {
@@ -64,7 +105,7 @@ class MobileCompany extends React.PureComponent {
     }
 
     addClient = () => {
-        this.setState({ mode: modes.add })
+        this.setState({ mode: modes.add, editClient: null })
     }
 
     render() {
@@ -99,7 +140,7 @@ class MobileCompany extends React.PureComponent {
                 <input type="button" value="Добавить клиента" onClick={this.addClient} />
                 {
                     (isAddMode || isEditMode) &&
-                    <AddEditClient mode={this.state.mode} />
+                    <AddEditClient mode={this.state.mode} client={this.state.editClient} />
                 }
             </div>
         )

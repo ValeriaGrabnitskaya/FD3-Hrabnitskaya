@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './MobileClient.css';
+import { companyEvents } from '../../events';
 
 class MobileClient extends React.PureComponent {
 
@@ -16,25 +17,25 @@ class MobileClient extends React.PureComponent {
     }),
   };
 
-  state = {
-    client: this.props.client,
-  };
+  onEditRow = () => {
+    companyEvents.emit('EditClient', this.props.client)
+  }
 
-  onEditRow = () => { }
-
-  onDeleteRow = () => { }
+  onDeleteRow = () => { 
+    companyEvents.emit('DeleteClient', this.props.client.id)
+  }
 
   render() {
 
-    console.log("MobileClient id=" + this.state.client.id + " render");
+    console.log("MobileClient id=" + this.props.client.id + " render");
 
     return (
       <tr>
-        <td className='ClientAttribute'>{this.state.client.firstName}</td>
-        <td className='ClientAttribute'>{this.state.client.secondName}</td>
-        <td className='ClientAttribute'>{this.state.client.lastName}</td>
-        <td className='ClientAttribute'>{this.state.client.balance}</td>
-        <td className='ClientAttribute'>{this.state.client.status}</td>
+        <td className='ClientAttribute'>{this.props.client.firstName}</td>
+        <td className='ClientAttribute'>{this.props.client.secondName}</td>
+        <td className='ClientAttribute'>{this.props.client.lastName}</td>
+        <td className='ClientAttribute'>{this.props.client.balance}</td>
+        <td className='ClientAttribute'>{this.props.client.status}</td>
         <td className='ClientAttribute'>
           <input type='button' className='Input' value='Редактировать' onClick={this.onEditRow} />
         </td>
