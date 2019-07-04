@@ -6,6 +6,7 @@ import MobileClient from './MobileClient/MobileClient';
 import clientStatuses from '../../static-data/client-statuses';
 import AddEditClient from '../AddEditClient/AddEditClient';
 import modes from '../../static-data/mode';
+import { companyEvents } from '../events';
 
 class MobileCompany extends React.PureComponent {
 
@@ -25,6 +26,14 @@ class MobileCompany extends React.PureComponent {
     state = {
         clients: this.props.clients,
         mode: null
+    };
+
+    componentDidMount = () => {
+
+    };
+
+    componentWillUnmount = () => {
+
     };
 
     getFilteredClients = (status) => {
@@ -90,7 +99,7 @@ class MobileCompany extends React.PureComponent {
                 <input type="button" value="Добавить клиента" onClick={this.addClient} />
                 {
                     (isAddMode || isEditMode) &&
-                    <AddEditClient mode={this.state.mode}/>
+                    <AddEditClient mode={this.state.mode} />
                 }
             </div>
         )
