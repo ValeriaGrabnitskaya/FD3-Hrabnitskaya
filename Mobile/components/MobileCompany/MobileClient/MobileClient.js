@@ -18,7 +18,7 @@ class MobileClient extends React.PureComponent {
   };
 
   onEditRow = () => {
-    companyEvents.emit('EditClient', this.props.client)
+    companyEvents.emit('EditClient', this.props.client.id)
   }
 
   onDeleteRow = () => { 

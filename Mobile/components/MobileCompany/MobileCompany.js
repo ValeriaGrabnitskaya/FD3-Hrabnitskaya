@@ -26,7 +26,7 @@ class MobileCompany extends React.PureComponent {
     state = {
         clients: this.props.clients,
         mode: null,
-        editClient: null
+        selectedClientId: null
     };
 
     componentDidMount = () => {
@@ -58,9 +58,8 @@ class MobileCompany extends React.PureComponent {
         }
     }
 
-    editClient = (client) => {
-        let editClient = client;
-        this.setState({ mode: modes.edit, editClient: editClient });
+    editClient = (selectedId) => {
+        this.setState({ mode: modes.edit, selectedClientId: selectedId });
     }
 
     cancelSaveClient = () => {
@@ -115,8 +114,10 @@ class MobileCompany extends React.PureComponent {
             <MobileClient key={client.id} client={client} />
         );
 
-        var isAddMode = this.state.mode === modes.add;
-        var isEditMode = this.state.mode === modes.edit;
+        var selectedClient = this.state.clients.find((client) => client.id === this.state.selectedClientId);
+
+        var isAddMode = this.state.mode == modes.add;
+        var isEditMode = this.state.mode == modes.edit;
 
         return (
             <div className='MobileCompany'>
@@ -139,8 +140,7 @@ class MobileCompany extends React.PureComponent {
                 </table>
                 <input type="button" value="Добавить клиента" onClick={this.addClient} />
                 {
-                    (isAddMode || isEditMode) &&
-                    <AddEditClient mode={this.state.mode} client={this.state.editClient} />
+                    (isAddMode || isEditMode) && <AddEditClient mode={this.state.mode} client={selectedClient} />
                 }
             </div>
         )
