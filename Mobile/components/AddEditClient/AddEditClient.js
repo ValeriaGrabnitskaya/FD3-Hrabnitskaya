@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import modes from '../../static-data/mode';
 import clientStatuses from './../../static-data/client-statuses';
 import { companyEvents } from '../events';
+import './AddEditClient.css';
 
 class AddEditClient extends React.PureComponent {
     static propTypes = {
@@ -39,6 +40,7 @@ class AddEditClient extends React.PureComponent {
     onSaveClient = () => {
         if (this.firstNameRef.value && this.secondNameRef.value && this.lastNameRef.value && this.balanceRef.value) {
             var client = {
+                ...this.props.client,
                 id: this.props.client ? this.props.client.id : this.state.generatedId,
                 firstName: this.firstNameRef.value,
                 secondName: this.secondNameRef.value,
@@ -62,7 +64,6 @@ class AddEditClient extends React.PureComponent {
     }
 
     render() {
-        console.log('AddEditClient render')
         return (
             <div className='ClientBlock'>
                 {
@@ -71,7 +72,7 @@ class AddEditClient extends React.PureComponent {
                 {
                     (this.props.mode === modes.edit) && <h1>Edit {this.props.initialGoodName}</h1>
                 }
-                <div className='InputBlock'>
+                <div key={this.props.client ? this.props.client.id : this.state.generatedId} className='InputBlock'>
                     <label className='BlockLabels'>
                         First name:
                             <input

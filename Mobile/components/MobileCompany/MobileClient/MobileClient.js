@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import './MobileClient.css';
 import { companyEvents } from '../../events';
+import clientStatuses from '../../../static-data/client-statuses';
 
 class MobileClient extends React.PureComponent {
 
@@ -21,11 +22,21 @@ class MobileClient extends React.PureComponent {
     companyEvents.emit('EditClient', this.props.client.id)
   }
 
-  onDeleteRow = () => { 
+  onDeleteRow = () => {
     companyEvents.emit('DeleteClient', this.props.client.id)
   }
 
   render() {
+
+    var clientStatusClass;
+
+    if (this.props.client.status === clientStatuses.Active) {
+      clientStatusClass = ' ActiveStatus';
+    }
+
+    if (this.props.client.status === clientStatuses.Blocked) {
+      clientStatusClass = ' BlockedStatus';
+    }
 
     console.log("MobileClient id=" + this.props.client.id + " render");
 
@@ -35,7 +46,7 @@ class MobileClient extends React.PureComponent {
         <td className='ClientAttribute'>{this.props.client.secondName}</td>
         <td className='ClientAttribute'>{this.props.client.lastName}</td>
         <td className='ClientAttribute'>{this.props.client.balance}</td>
-        <td className='ClientAttribute'>{this.props.client.status}</td>
+        <td className={'ClientAttribute' + clientStatusClass}>{this.props.client.status}</td>
         <td className='ClientAttribute'>
           <input type='button' className='Input' value='Редактировать' onClick={this.onEditRow} />
         </td>

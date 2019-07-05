@@ -1,0 +1,44 @@
+.MobileCompany
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.MobileCompany .MobileCompanyFilterButtons
+{
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.MobileCompany .MobileCompanyButton 
+{
+    margin-right: 10px;
+    padding: 7px 10px 7px 10px;
+    background-color: rgb(50, 100, 300);
+    color: white;
+    font-size: 14px;
+    border: 0;
+}
+
+.MobileCompany .MobileCompanyButton:hover
+{
+    background-color: rgb(0, 0, 179);
+    color: aliceblue;
+}
+
+.MobileCompany .MobileCompanyClients
+{
+    margin: auto;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+}
+
+.MobileCompany .MobileCompanyClients .TableHeader
+{
+    border-bottom: 1px solid black;
+    height: 50px;
+}

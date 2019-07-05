@@ -73,7 +73,7 @@ class MobileCompany extends React.PureComponent {
                 copiedClients.splice(i, 1);
             }
         });
-        this.setState({ clients: copiedClients })
+        this.setState({ clients: copiedClients, mode: modes.none })
     }
 
     getFilteredClients = (status) => {
@@ -104,7 +104,7 @@ class MobileCompany extends React.PureComponent {
     }
 
     addClient = () => {
-        this.setState({ mode: modes.add, editClient: null })
+        this.setState({ mode: modes.add, selectedClientId: null })
     }
 
     render() {
@@ -121,24 +121,26 @@ class MobileCompany extends React.PureComponent {
 
         return (
             <div className='MobileCompany'>
-                <input type="button" value="Все" onClick={() => this.getFilteredClients()} />
-                <input type="button" value="Активные" onClick={() => this.getFilteredClients(clientStatuses.Active)} />
-                <input type="button" value="Заблокированные" onClick={() => this.getFilteredClients(clientStatuses.Blocked)} />
+                <div className='MobileCompanyFilterButtons'>
+                    <input type="button" className='MobileCompanyButton' value="Все" onClick={() => this.getFilteredClients()} />
+                    <input type="button" className='MobileCompanyButton' value="Активные" onClick={() => this.getFilteredClients(clientStatuses.Active)} />
+                    <input type="button" className='MobileCompanyButton' value="Заблокированные" onClick={() => this.getFilteredClients(clientStatuses.Blocked)} />
+                </div>
                 <table className='MobileCompanyClients'>
                     <thead>
                         <tr>
-                            <th>Фамилия</th>
-                            <th>Имя</th>
-                            <th>Отчество</th>
-                            <th>Баланс</th>
-                            <th>Статус</th>
-                            <th>Редактировать</th>
-                            <th>Удалить</th>
+                            <th className='TableHeader'>Фамилия</th>
+                            <th className='TableHeader'>Имя</th>
+                            <th className='TableHeader'>Отчество</th>
+                            <th className='TableHeader'>Баланс</th>
+                            <th className='TableHeader'>Статус</th>
+                            <th className='TableHeader'>Редактировать</th>
+                            <th className='TableHeader'>Удалить</th>
                         </tr>
                     </thead>
                     <tbody>{clients}</tbody>
                 </table>
-                <input type="button" value="Добавить клиента" onClick={this.addClient} />
+                <input type="button" className='MobileCompanyButton' value="Добавить клиента" onClick={this.addClient} />
                 {
                     (isAddMode || isEditMode) && <AddEditClient mode={this.state.mode} client={selectedClient} />
                 }
