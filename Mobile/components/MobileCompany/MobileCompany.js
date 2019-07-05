@@ -8,6 +8,10 @@ import AddEditClient from '../AddEditClient/AddEditClient';
 import modes from '../../static-data/mode';
 import { companyEvents } from '../events';
 
+import { filterClients } from '../../modules/filterClients';
+import { deleteClient } from '../../modules/deleteClient';
+import { saveClient } from '../../modules/saveClient';
+
 class MobileCompany extends React.PureComponent {
 
     static propTypes = {
@@ -30,10 +34,10 @@ class MobileCompany extends React.PureComponent {
     };
 
     componentDidMount = () => {
-        companyEvents.addListener('SaveClient', this.saveClient);
+        companyEvents.addListener('SaveClient', this.saveUpdateClient);
         companyEvents.addListener('EditClient', this.editClient);
         companyEvents.addListener('CancelSaveClient', this.cancelSaveClient);
-        companyEvents.addListener('DeleteClient', this.deleteClient);
+        companyEvents.addListener('DeleteClient', this.deleteSelectedClient);
     };
 
     componentWillUnmount = () => {
@@ -43,19 +47,9 @@ class MobileCompany extends React.PureComponent {
         companyEvents.removeListener('DeleteClient', this.deleteClient);
     };
 
-    saveClient = (savedClient) => {
-        let editClient = this.state.clients.find((client) => client.id === savedClient.id);
-        if (editClient) {
-            let copiedClients = [...this.state.clients];
-            copiedClients.forEach((client, i) => {
-                if (client.id == savedClient.id) {
-                    copiedClients.splice(i, 1, savedClient)
-                }
-            });
-            this.setState({ clients: copiedClients, mode: modes.none });
-        } else {
-            this.setState({ clients: [...this.state.clients, savedClient], mode: modes.none });
-        }
+    saveUpdateClient = (savedClient) => {
+        let copiedClients = saveClient(savedClient, this.state.clients);
+        this.setState({ clients: copiedClients, mode: modes.none });
     }
 
     editClient = (selectedId) => {
@@ -66,40 +60,24 @@ class MobileCompany extends React.PureComponent {
         this.setState({ mode: modes.none, editClient: null })
     }
 
-    deleteClient = (selectedId) => {
-        let copiedClients = [...this.state.clients];
-        copiedClients.forEach((client, i) => {
-            if (client.id == selectedId) {
-                copiedClients.splice(i, 1);
-            }
-        });
+    deleteSelectedClient = (selectedId) => {
+        let copiedClients = deleteClient(selectedId, this.state.clients);
         this.setState({ clients: copiedClients, mode: modes.none })
     }
 
     getFilteredClients = (status) => {
+        let filteredArray = [];
         switch (status) {
             case clientStatuses.Active:
-                this.filterClients(clientStatuses.Active);
+                filteredArray = filterClients(clientStatuses.Active, this.props.clients);
                 break;
             case clientStatuses.Blocked:
-                this.filterClients(clientStatuses.Blocked);
+                filteredArray = filterClients(clientStatuses.Blocked, this.props.clients);
                 break;
             default:
-                this.filterClients();
+                filteredArray = filterClients(null, this.props.clients);
                 break;
         }
-    }
-
-    filterClients = (status) => {
-        var filteredArray = [];
-        if (status) {
-            filteredArray = this.props.clients.filter((client) => {
-                return client.status === status
-            })
-        } else {
-            filteredArray = this.props.clients;
-        }
-
         this.setState({ clients: filteredArray })
     }
 
@@ -122,9 +100,9 @@ class MobileCompany extends React.PureComponent {
         return (
             <div className='MobileCompany'>
                 <div className='MobileCompanyFilterButtons'>
-                    <input type="button" className='MobileCompanyButton' value="Все" onClick={() => this.getFilteredClients()} />
-                    <input type="button" className='MobileCompanyButton' value="Активные" onClick={() => this.getFilteredClients(clientStatuses.Active)} />
-                    <input type="button" className='MobileCompanyButton' value="Заблокированные" onClick={() => this.getFilteredClients(clientStatuses.Blocked)} />
+                    <input type="button" id="allClientsBtn" className='MobileCompanyButton' value="Все" onClick={() => this.getFilteredClients()} />
+                    <input type="button" id="activeFilterBtn" className='MobileCompanyButton' value="Активные" onClick={() => this.getFilteredClients(clientStatuses.Active)} />
+                    <input type="button" id="blockedFilterBtn" className='MobileCompanyButton' value="Заблокированные" onClick={() => this.getFilteredClients(clientStatuses.Blocked)} />
                 </div>
                 <table className='MobileCompanyClients'>
                     <thead>
@@ -140,7 +118,7 @@ class MobileCompany extends React.PureComponent {
                     </thead>
                     <tbody>{clients}</tbody>
                 </table>
-                <input type="button" className='MobileCompanyButton' value="Добавить клиента" onClick={this.addClient} />
+                <input type="button" id="addClientBtn" className='MobileCompanyButton' value="Добавить клиента" onClick={this.addClient} />
                 {
                     (isAddMode || isEditMode) && <AddEditClient mode={this.state.mode} client={selectedClient} />
                 }

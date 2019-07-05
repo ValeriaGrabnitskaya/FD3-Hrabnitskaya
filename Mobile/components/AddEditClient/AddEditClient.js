@@ -64,6 +64,8 @@ class AddEditClient extends React.PureComponent {
     }
 
     render() {
+        console.log("AddEditClient render");
+        
         return (
             <div className='ClientBlock'>
                 {
@@ -76,6 +78,7 @@ class AddEditClient extends React.PureComponent {
                     <label className='BlockLabels'>
                         First name:
                             <input
+                            id="firstName"
                             className='BlockInput'
                             defaultValue={this.props.client ? this.props.client.firstName : ""}
                             type='text'
@@ -84,6 +87,7 @@ class AddEditClient extends React.PureComponent {
                     <label className='BlockLabels'>
                         Second name:
                             <input
+                            id="secondName"
                             className='BlockInput'
                             defaultValue={this.props.client ? this.props.client.secondName : ""}
                             type='text'
@@ -92,6 +96,7 @@ class AddEditClient extends React.PureComponent {
                     <label className='BlockLabels'>
                         Last name:
                             <input
+                            id="lastName"
                             className='BlockInput'
                             defaultValue={this.props.client ? this.props.client.lastName : ""}
                             type='text'
@@ -100,6 +105,7 @@ class AddEditClient extends React.PureComponent {
                     <label className='BlockLabels'>
                         Balance:
                             <input
+                            id="balance"
                             className='BlockInput'
                             defaultValue={this.props.client ? this.props.client.balance : ""}
                             type='number'
@@ -107,7 +113,7 @@ class AddEditClient extends React.PureComponent {
                     </label><br />
                 </div>
                 <div className='ButtonBlock'>
-                    <input className='Button' type='button' value='Save' onClick={this.onSaveClient} />
+                    <input className='Button' id='saveClientBtn' type='button' value='Save' onClick={this.onSaveClient} />
                     <input className='Button' type='button' value='Cancel' onClick={this.onCancelSave} />
                 </div>
             </div>
