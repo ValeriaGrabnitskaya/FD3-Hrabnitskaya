@@ -44,10 +44,8 @@ class MobileCompany extends React.PureComponent {
     };
 
     saveClient = (savedClient) => {
-        if (this.state.mode === modes.add) {
-            this.setState({ clients: [...this.state.clients, savedClient], mode: modes.none });
-        }
-        if (this.state.mode === modes.edit) {
+        let editClient = this.state.clients.find((client) => client.id === savedClient.id);
+        if (editClient) {
             let copiedClients = [...this.state.clients];
             copiedClients.forEach((client, i) => {
                 if (client.id == savedClient.id) {
@@ -55,6 +53,8 @@ class MobileCompany extends React.PureComponent {
                 }
             });
             this.setState({ clients: copiedClients, mode: modes.none });
+        } else {
+            this.setState({ clients: [...this.state.clients, savedClient], mode: modes.none });
         }
     }
 
