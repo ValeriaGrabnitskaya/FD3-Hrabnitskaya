@@ -149,4 +149,4 @@ class MobileCompany extends React.PureComponent {
     }
 }
 
-export default MobileCompany
+export default MobileCompany;

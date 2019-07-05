@@ -48,10 +48,10 @@ class MobileClient extends React.PureComponent {
         <td className='ClientAttribute'>{this.props.client.balance}</td>
         <td className={'ClientAttribute' + clientStatusClass}>{this.props.client.status}</td>
         <td className='ClientAttribute'>
-          <input type='button' className='Input' value='Редактировать' onClick={this.onEditRow} />
+          <input type='button' id="editBtn" className='Input' value='Редактировать' onClick={this.onEditRow} />
         </td>
         <td className='ClientAttribute'>
-          <input type='button' className='Input' value='Удалить' onClick={this.onDeleteRow} />
+          <input type='button' id="deleteBtn" className='Input' value='Удалить' onClick={this.onDeleteRow} />
         </td>
       </tr>
     );
