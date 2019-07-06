@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import modes from '../../static-data/mode';
-import clientStatuses from './../../static-data/client-statuses';
+import clientStatuses from '../../static-data/client-statuses';
 import { companyEvents } from '../events';
+import { getNewUpdateClient } from '../../modules/getNewUpdateClient';
 import './AddEditClient.css';
 
 class AddEditClient extends React.PureComponent {
@@ -38,19 +39,16 @@ class AddEditClient extends React.PureComponent {
     }
 
     onSaveClient = () => {
-        console.log('....save....')
-        if (this.firstNameRef && this.secondNameRef && this.lastNameRef && this.balanceRef) {
-            var client = {
-                ...this.props.client,
+        if (this.firstNameRef.value && this.secondNameRef.value && this.lastNameRef.value && this.balanceRef.value) {
+            const newClientData = {
                 id: this.props.client ? this.props.client.id : this.state.generatedId,
                 firstName: this.firstNameRef.value,
                 secondName: this.secondNameRef.value,
                 lastName: this.lastNameRef.value,
-                balance: +this.balanceRef.value,
-                status: +this.balanceRef.value > 0 ? clientStatuses.Active : clientStatuses.Blocked
-            }
-            console.log('....save....')
-            companyEvents.emit('SaveClient', client);
+                balance: +this.balanceRef.value
+            };
+            getNewUpdateClient(newClientData);
+
             if (this.props.mode === modes.add) {
                 this.setState({ generatedId: this.state.generatedId + 1 })
             }
@@ -80,7 +78,6 @@ class AddEditClient extends React.PureComponent {
                     <label className='BlockLabels'>
                         First name:
                             <input
-                            id="firstName"
                             className='BlockInput'
                             defaultValue={this.props.client ? this.props.client.firstName : ""}
                             type='text'
@@ -89,7 +86,6 @@ class AddEditClient extends React.PureComponent {
                     <label className='BlockLabels'>
                         Second name:
                             <input
-                            id="secondName"
                             className='BlockInput'
                             defaultValue={this.props.client ? this.props.client.secondName : ""}
                             type='text'
@@ -98,7 +94,6 @@ class AddEditClient extends React.PureComponent {
                     <label className='BlockLabels'>
                         Last name:
                             <input
-                            id="lastName"
                             className='BlockInput'
                             defaultValue={this.props.client ? this.props.client.lastName : ""}
                             type='text'
@@ -107,7 +102,6 @@ class AddEditClient extends React.PureComponent {
                     <label className='BlockLabels'>
                         Balance:
                             <input
-                            id="balance"
                             className='BlockInput'
                             defaultValue={this.props.client ? this.props.client.balance : ""}
                             type='number'

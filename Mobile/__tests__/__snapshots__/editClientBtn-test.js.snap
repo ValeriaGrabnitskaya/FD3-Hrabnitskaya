@@ -356,27 +356,27 @@ exports[`проверка редактирования клиента 2`] = `
         <td
           className="ClientAttribute"
         >
-          Иванов
+          1
         </td>
         <td
           className="ClientAttribute"
         >
-          Иван
+          1
         </td>
         <td
           className="ClientAttribute"
         >
-          Иванович
+          1
         </td>
         <td
           className="ClientAttribute"
         >
-          100
+          -10
         </td>
         <td
-          className="ClientAttribute ActiveStatus"
+          className="ClientAttribute BlockedStatus"
         >
-          active
+          blocked
         </td>
         <td
           className="ClientAttribute"
@@ -557,81 +557,5 @@ exports[`проверка редактирования клиента 2`] = `
     type="button"
     value="Добавить клиента"
   />
-  <div
-    className="ClientBlock"
-  >
-    <h1>
-      Edit 
-    </h1>
-    <div
-      className="InputBlock"
-    >
-      <label
-        className="BlockLabels"
-      >
-        First name:
-        <input
-          className="BlockInput"
-          defaultValue="Иванов"
-          id="firstName"
-          type="text"
-        />
-      </label>
-      <br />
-      <label
-        className="BlockLabels"
-      >
-        Second name:
-        <input
-          className="BlockInput"
-          defaultValue="Иван"
-          id="secondName"
-          type="text"
-        />
-      </label>
-      <br />
-      <label
-        className="BlockLabels"
-      >
-        Last name:
-        <input
-          className="BlockInput"
-          defaultValue="Иванович"
-          id="lastName"
-          type="text"
-        />
-      </label>
-      <br />
-      <label
-        className="BlockLabels"
-      >
-        Balance:
-        <input
-          className="BlockInput"
-          defaultValue={100}
-          id="balance"
-          type="number"
-        />
-      </label>
-      <br />
-    </div>
-    <div
-      className="ButtonBlock"
-    >
-      <input
-        className="Button"
-        id="saveBtn"
-        onClick={[Function]}
-        type="button"
-        value="Save"
-      />
-      <input
-        className="Button"
-        onClick={[Function]}
-        type="button"
-        value="Cancel"
-      />
-    </div>
-  </div>
 </div>
 `;

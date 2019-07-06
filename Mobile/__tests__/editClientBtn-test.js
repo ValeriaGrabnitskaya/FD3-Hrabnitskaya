@@ -5,6 +5,7 @@ import React from 'react';
 
 import MobileCompany from '../components/MobileCompany/MobileCompany';
 import MobileClient from '../components/MobileCompany/MobileClient/MobileClient';
+import { getNewUpdateClient } from '../modules/getNewUpdateClient';
 
 var clients = require('../data/clients.json');
 
@@ -31,6 +32,8 @@ test('проверка редактирования клиента', () => {
 
     const editBtn = MobileClientComponent.root.find((el) => el.props.id == 'editBtn');
     editBtn.props.onClick();
+
+    getNewUpdateClient(updateClient);
 
     let componentTree2 = MobileCompanyComponent.toJSON();
     expect(componentTree2).toMatchSnapshot();

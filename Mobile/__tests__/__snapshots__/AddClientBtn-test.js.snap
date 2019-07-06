@@ -548,6 +548,55 @@ exports[`проверка создание клиента 2`] = `
           />
         </td>
       </tr>
+      <tr>
+        <td
+          className="ClientAttribute"
+        >
+          1
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          1
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          1
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          -10
+        </td>
+        <td
+          className="ClientAttribute BlockedStatus"
+        >
+          blocked
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          <input
+            className="Input"
+            id="editBtn"
+            onClick={[Function]}
+            type="button"
+            value="Редактировать"
+          />
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          <input
+            className="Input"
+            id="deleteBtn"
+            onClick={[Function]}
+            type="button"
+            value="Удалить"
+          />
+        </td>
+      </tr>
     </tbody>
   </table>
   <input
@@ -557,81 +606,5 @@ exports[`проверка создание клиента 2`] = `
     type="button"
     value="Добавить клиента"
   />
-  <div
-    className="ClientBlock"
-  >
-    <h1>
-      Add new client
-    </h1>
-    <div
-      className="InputBlock"
-    >
-      <label
-        className="BlockLabels"
-      >
-        First name:
-        <input
-          className="BlockInput"
-          defaultValue=""
-          id="firstName"
-          type="text"
-        />
-      </label>
-      <br />
-      <label
-        className="BlockLabels"
-      >
-        Second name:
-        <input
-          className="BlockInput"
-          defaultValue=""
-          id="secondName"
-          type="text"
-        />
-      </label>
-      <br />
-      <label
-        className="BlockLabels"
-      >
-        Last name:
-        <input
-          className="BlockInput"
-          defaultValue=""
-          id="lastName"
-          type="text"
-        />
-      </label>
-      <br />
-      <label
-        className="BlockLabels"
-      >
-        Balance:
-        <input
-          className="BlockInput"
-          defaultValue=""
-          id="balance"
-          type="number"
-        />
-      </label>
-      <br />
-    </div>
-    <div
-      className="ButtonBlock"
-    >
-      <input
-        className="Button"
-        id="saveBtn"
-        onClick={[Function]}
-        type="button"
-        value="Save"
-      />
-      <input
-        className="Button"
-        onClick={[Function]}
-        type="button"
-        value="Cancel"
-      />
-    </div>
-  </div>
 </div>
 `;
