@@ -3,8 +3,9 @@
 import clientStatuses from '../static-data/client-statuses';
 import { companyEvents } from '../components/events';
 
-const getNewUpdateClient = (newClientData) => {
+const getNewUpdateClient = (newClientData, currentClientData) => {
     var client = {
+        ...currentClientData,
         id: newClientData.id,
         firstName: newClientData.firstName,
         secondName: newClientData.secondName,

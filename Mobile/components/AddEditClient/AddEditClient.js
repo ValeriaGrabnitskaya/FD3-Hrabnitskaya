@@ -47,7 +47,7 @@ class AddEditClient extends React.PureComponent {
                 lastName: this.lastNameRef.value,
                 balance: +this.balanceRef.value
             };
-            getNewUpdateClient(newClientData);
+            getNewUpdateClient(newClientData, this.props.client);
 
             if (this.props.mode === modes.add) {
                 this.setState({ generatedId: this.state.generatedId + 1 })
