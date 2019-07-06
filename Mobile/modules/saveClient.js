@@ -7,7 +7,7 @@ const saveClient = (savedClient, stateClients) => {
         if (editClient) {
             let copiedClients = [...stateClients];
             let editedClientIndex = stateClients.findIndex((client) => client.id === savedClient.id);
-            copiedClients.splice(editedClientIndex, 1, savedClient)
+            copiedClients[editedClientIndex] = savedClient;
             return copiedClients;
         } else {
             return [...stateClients, savedClient];
