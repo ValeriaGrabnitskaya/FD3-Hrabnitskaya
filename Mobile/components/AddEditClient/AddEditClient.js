@@ -38,7 +38,8 @@ class AddEditClient extends React.PureComponent {
     }
 
     onSaveClient = () => {
-        if (this.firstNameRef.value && this.secondNameRef.value && this.lastNameRef.value && this.balanceRef.value) {
+        console.log('....save....')
+        if (this.firstNameRef && this.secondNameRef && this.lastNameRef && this.balanceRef) {
             var client = {
                 ...this.props.client,
                 id: this.props.client ? this.props.client.id : this.state.generatedId,
@@ -48,6 +49,7 @@ class AddEditClient extends React.PureComponent {
                 balance: +this.balanceRef.value,
                 status: +this.balanceRef.value > 0 ? clientStatuses.Active : clientStatuses.Blocked
             }
+            console.log('....save....')
             companyEvents.emit('SaveClient', client);
             if (this.props.mode === modes.add) {
                 this.setState({ generatedId: this.state.generatedId + 1 })
@@ -65,7 +67,7 @@ class AddEditClient extends React.PureComponent {
 
     render() {
         console.log("AddEditClient render");
-        
+
         return (
             <div className='ClientBlock'>
                 {
@@ -113,7 +115,7 @@ class AddEditClient extends React.PureComponent {
                     </label><br />
                 </div>
                 <div className='ButtonBlock'>
-                    <input className='Button' id='saveClientBtn' type='button' value='Save' onClick={this.onSaveClient} />
+                    <input className='Button' id='saveBtn' type='button' value='Save' onClick={this.onSaveClient} />
                     <input className='Button' type='button' value='Cancel' onClick={this.onCancelSave} />
                 </div>
             </div>
