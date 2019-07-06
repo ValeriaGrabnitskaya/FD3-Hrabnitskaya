@@ -272,7 +272,7 @@ exports[`проверка фильтрации активных клиентов
   </table>
   <input
     className="MobileCompanyButton"
-    id="addClientBtn"
+    id="addBtn"
     onClick={[Function]}
     type="button"
     value="Добавить клиента"
@@ -503,7 +503,7 @@ exports[`проверка фильтрации активных клиентов
   </table>
   <input
     className="MobileCompanyButton"
-    id="addClientBtn"
+    id="addBtn"
     onClick={[Function]}
     type="button"
     value="Добавить клиента"

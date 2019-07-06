@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`проверка фильтрации заблокированных клиентов 1`] = `
+exports[`проверка создание клиента 1`] = `
 <div
   className="MobileCompany"
 >
@@ -280,7 +280,7 @@ exports[`проверка фильтрации заблокированных к
 </div>
 `;
 
-exports[`проверка фильтрации заблокированных клиентов 2`] = `
+exports[`проверка создание клиента 2`] = `
 <div
   className="MobileCompany"
 >
@@ -356,6 +356,153 @@ exports[`проверка фильтрации заблокированных к
         <td
           className="ClientAttribute"
         >
+          Иванов
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          Иван
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          Иванович
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          100
+        </td>
+        <td
+          className="ClientAttribute ActiveStatus"
+        >
+          active
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          <input
+            className="Input"
+            id="editBtn"
+            onClick={[Function]}
+            type="button"
+            value="Редактировать"
+          />
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          <input
+            className="Input"
+            id="deleteBtn"
+            onClick={[Function]}
+            type="button"
+            value="Удалить"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="ClientAttribute"
+        >
+          Петров
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          Пётр
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          Петрович
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          200
+        </td>
+        <td
+          className="ClientAttribute ActiveStatus"
+        >
+          active
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          <input
+            className="Input"
+            id="editBtn"
+            onClick={[Function]}
+            type="button"
+            value="Редактировать"
+          />
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          <input
+            className="Input"
+            id="deleteBtn"
+            onClick={[Function]}
+            type="button"
+            value="Удалить"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="ClientAttribute"
+        >
+          Сидоров
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          Сидр
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          Сидорович
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          300
+        </td>
+        <td
+          className="ClientAttribute ActiveStatus"
+        >
+          active
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          <input
+            className="Input"
+            id="editBtn"
+            onClick={[Function]}
+            type="button"
+            value="Редактировать"
+          />
+        </td>
+        <td
+          className="ClientAttribute"
+        >
+          <input
+            className="Input"
+            id="deleteBtn"
+            onClick={[Function]}
+            type="button"
+            value="Удалить"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="ClientAttribute"
+        >
           Григорьев
         </td>
         <td
@@ -410,5 +557,81 @@ exports[`проверка фильтрации заблокированных к
     type="button"
     value="Добавить клиента"
   />
+  <div
+    className="ClientBlock"
+  >
+    <h1>
+      Add new client
+    </h1>
+    <div
+      className="InputBlock"
+    >
+      <label
+        className="BlockLabels"
+      >
+        First name:
+        <input
+          className="BlockInput"
+          defaultValue=""
+          id="firstName"
+          type="text"
+        />
+      </label>
+      <br />
+      <label
+        className="BlockLabels"
+      >
+        Second name:
+        <input
+          className="BlockInput"
+          defaultValue=""
+          id="secondName"
+          type="text"
+        />
+      </label>
+      <br />
+      <label
+        className="BlockLabels"
+      >
+        Last name:
+        <input
+          className="BlockInput"
+          defaultValue=""
+          id="lastName"
+          type="text"
+        />
+      </label>
+      <br />
+      <label
+        className="BlockLabels"
+      >
+        Balance:
+        <input
+          className="BlockInput"
+          defaultValue=""
+          id="balance"
+          type="number"
+        />
+      </label>
+      <br />
+    </div>
+    <div
+      className="ButtonBlock"
+    >
+      <input
+        className="Button"
+        id="saveBtn"
+        onClick={[Function]}
+        type="button"
+        value="Save"
+      />
+      <input
+        className="Button"
+        onClick={[Function]}
+        type="button"
+        value="Cancel"
+      />
+    </div>
+  </div>
 </div>
 `;

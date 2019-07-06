@@ -272,7 +272,7 @@ exports[`проверка фильтрации всех клиентов 1`] = `
   </table>
   <input
     className="MobileCompanyButton"
-    id="addClientBtn"
+    id="addBtn"
     onClick={[Function]}
     type="button"
     value="Добавить клиента"
@@ -552,7 +552,7 @@ exports[`проверка фильтрации всех клиентов 2`] = `
   </table>
   <input
     className="MobileCompanyButton"
-    id="addClientBtn"
+    id="addBtn"
     onClick={[Function]}
     type="button"
     value="Добавить клиента"

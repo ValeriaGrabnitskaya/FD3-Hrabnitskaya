@@ -118,7 +118,7 @@ class MobileCompany extends React.PureComponent {
                     </thead>
                     <tbody>{clients}</tbody>
                 </table>
-                <input type="button" id="addClientBtn" className='MobileCompanyButton' value="Добавить клиента" onClick={this.addClient} />
+                <input type="button" id="addBtn" className='MobileCompanyButton' value="Добавить клиента" onClick={this.addClient} />
                 {
                     (isAddMode || isEditMode) && <AddEditClient mode={this.state.mode} client={selectedClient} />
                 }
