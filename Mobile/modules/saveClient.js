@@ -6,11 +6,8 @@ const saveClient = (savedClient, stateClients) => {
         editClient = stateClients.find((client) => client.id === savedClient.id);
         if (editClient) {
             let copiedClients = [...stateClients];
-            copiedClients.forEach((client, i) => {
-                if (client.id == savedClient.id) {
-                    copiedClients.splice(i, 1, savedClient)
-                }
-            });
+            let editedClientIndex = stateClients.findIndex((client) => client.id === savedClient.id);
+            copiedClients.splice(editedClientIndex, 1, savedClient)
             return copiedClients;
         } else {
             return [...stateClients, savedClient];

@@ -41,7 +41,7 @@ class MobileCompany extends React.PureComponent {
     };
 
     componentWillUnmount = () => {
-        companyEvents.removeListener('SaveClient', this.saveClient);
+        companyEvents.removeListener('SaveClient', this.saveUpdateClient);
         companyEvents.removeListener('EditClient', this.editClient);
         companyEvents.removeListener('CancelSaveClient', this.cancelSaveClient);
         companyEvents.removeListener('DeleteClient', this.deleteClient);
