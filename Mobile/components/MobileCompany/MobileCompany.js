@@ -30,7 +30,8 @@ class MobileCompany extends React.PureComponent {
     state = {
         clients: this.props.clients,
         mode: null,
-        selectedClientId: null
+        selectedClientId: null,
+        uniqueId: 4
     };
 
     componentDidMount = () => {
@@ -82,7 +83,7 @@ class MobileCompany extends React.PureComponent {
     }
 
     addClient = () => {
-        this.setState({ mode: modes.add, selectedClientId: null })
+        this.setState({ mode: modes.add, selectedClientId: null, uniqueId: this.state.uniqueId + 1 })
     }
 
     render() {
@@ -120,7 +121,7 @@ class MobileCompany extends React.PureComponent {
                 </table>
                 <input type="button" id="addBtn" className='MobileCompanyButton' value="Добавить клиента" onClick={this.addClient} />
                 {
-                    (isAddMode || isEditMode) && <AddEditClient mode={this.state.mode} client={selectedClient} />
+                    (isAddMode || isEditMode) && <AddEditClient mode={this.state.mode} client={selectedClient} uniqueId={this.state.uniqueId} />
                 }
             </div>
         )

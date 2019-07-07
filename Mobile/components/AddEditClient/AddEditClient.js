@@ -10,11 +10,8 @@ import './AddEditClient.css';
 class AddEditClient extends React.PureComponent {
     static propTypes = {
         mode: PropTypes.number.isRequired,
-        client: PropTypes.object
-    };
-
-    state = {
-        generatedId: 5
+        client: PropTypes.object,
+        uniqueId: PropTypes.number
     };
 
     firstNameRef = null;
@@ -41,17 +38,13 @@ class AddEditClient extends React.PureComponent {
     onSaveClient = () => {
         if (this.firstNameRef.value && this.secondNameRef.value && this.lastNameRef.value && this.balanceRef.value) {
             const newClientData = {
-                id: this.props.client ? this.props.client.id : this.state.generatedId,
+                id: this.props.client ? this.props.client.id : this.props.uniqueId,
                 firstName: this.firstNameRef.value,
                 secondName: this.secondNameRef.value,
                 lastName: this.lastNameRef.value,
                 balance: +this.balanceRef.value
             };
             getNewUpdateClient(newClientData, this.props.client);
-
-            if (this.props.mode === modes.add) {
-                this.setState({ generatedId: this.state.generatedId + 1 })
-            }
         }
     }
 
@@ -74,7 +67,7 @@ class AddEditClient extends React.PureComponent {
                 {
                     (this.props.mode === modes.edit) && <h1>Edit {this.props.initialGoodName}</h1>
                 }
-                <div key={this.props.client ? this.props.client.id : this.state.generatedId} className='InputBlock'>
+                <div key={this.props.client ? this.props.client.id : this.props.uniqueId} className='InputBlock'>
                     <label className='BlockLabels'>
                         First name:
                             <input
