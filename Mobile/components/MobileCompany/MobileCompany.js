@@ -29,6 +29,7 @@ class MobileCompany extends React.PureComponent {
 
     state = {
         clients: this.props.clients,
+        filterClients: this.props.clients,
         mode: null,
         selectedClientId: null,
         uniqueId: 4
@@ -50,7 +51,7 @@ class MobileCompany extends React.PureComponent {
 
     saveUpdateClient = (savedClient) => {
         let copiedClients = saveClient(savedClient, this.state.clients);
-        this.setState({ clients: copiedClients, mode: modes.none });
+        this.setState({ clients: copiedClients, filterClients: copiedClients, mode: modes.none });
     }
 
     editClient = (selectedId) => {
@@ -63,20 +64,20 @@ class MobileCompany extends React.PureComponent {
 
     deleteSelectedClient = (selectedId) => {
         let copiedClients = deleteClient(selectedId, this.state.clients);
-        this.setState({ clients: copiedClients, mode: modes.none })
+        this.setState({ clients: copiedClients, filterClients: copiedClients, mode: modes.none })
     }
 
     getFilteredClients = (status) => {
-        let filteredArray = [];
+        let filteredArray = this.state.filterClients;
         switch (status) {
             case clientStatuses.Active:
-                filteredArray = filterClients(clientStatuses.Active, this.props.clients);
+                filteredArray = filterClients(clientStatuses.Active, filteredArray);
                 break;
             case clientStatuses.Blocked:
-                filteredArray = filterClients(clientStatuses.Blocked, this.props.clients);
+                filteredArray = filterClients(clientStatuses.Blocked, filteredArray);
                 break;
             default:
-                filteredArray = filterClients(null, this.props.clients);
+                filteredArray = filterClients(null, filteredArray);
                 break;
         }
         this.setState({ clients: filteredArray })
