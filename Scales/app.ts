@@ -11,14 +11,14 @@ class Scales {
     getSumScale(): number {
         let productsWeight = 0;
         this.productsArray.forEach((product: Product) => {
-            productsWeight += product.weight;
+            productsWeight += product.getScale();
         })
         return productsWeight;
     }
     getNameList(): string[] {
         let productsNameList: string[] = [];
         this.productsArray.forEach((product: Product) => {
-            productsNameList.push(product.name);
+            productsNameList.push(product.getName());
         })
         return productsNameList;
     }
