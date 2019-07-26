@@ -17,15 +17,19 @@ class Scales<StorageEngine extends IStorageEngine> {
     }
     getSumScale(): number {
         let productsWeight = 0;
-        this.storageEngineArray.forEach((storageEngine: StorageEngine, index) => {
-            productsWeight += storageEngine.getItem(index).getScale();
+        this.storageEngineArray.forEach((storageEngine: StorageEngine) => {
+            for (var i = 0; i < storageEngine.getCount(); i++) {
+                productsWeight += storageEngine.getItem(i).getScale();
+            }
         })
         return productsWeight;
     }
     getNameList(): string[] {
         let productsNameList: string[] = [];
-        this.storageEngineArray.forEach((storageEngine: StorageEngine, index) => {
-            productsNameList.push(storageEngine.getItem(index).getName());
+        this.storageEngineArray.forEach((storageEngine: StorageEngine) => {
+            for (var i = 0; i < storageEngine.getCount(); i++) {
+                productsNameList.push(storageEngine.getItem(i).getName());
+            }
         })
         return productsNameList;
     }
@@ -55,7 +59,7 @@ class ScalesStorageEngineArray implements IStorageEngine {
     productsArray: Array<Product>;
 
     constructor() {
-        this.productsArray=[];
+        this.productsArray = [];
     }
 
     addItem(product: Product) {
@@ -71,43 +75,48 @@ class ScalesStorageEngineArray implements IStorageEngine {
     }
 }
 
+localStorage.clear()
+
+class ScalesStorageEngineLocalStorage implements IStorageEngine {
+
+    partKey: string = 'product';
+
+    addItem(product: Product) {
+        let key: string = this.partKey + this.getCount();
+        localStorage.setItem(key, JSON.stringify(product));
+    }
+
+    getItem(id: number): Product {
+        let key: string = this.partKey + id;
+        let parsedObject = JSON.parse(localStorage.getItem(key));
+        return new Product(parsedObject.name, parsedObject.weight);
+    }
+
+    getCount(): number {
+        return localStorage.length;
+    }
+}
+
 var product1 = new Product('product1', 100);
 var product2 = new Product('product2', 200);
 
 var scalesStorageEngineArray = new ScalesStorageEngineArray;
+var scalesStorageEngineLocalStorage = new ScalesStorageEngineLocalStorage;
 
 this.scalesStorageEngineArray.addItem(product1);
 this.scalesStorageEngineArray.addItem(product2);
 
+this.scalesStorageEngineLocalStorage.addItem(product1);
+
 var scaleArray = new Scales<ScalesStorageEngineArray>();
+var scaleLocalStorage = new Scales<ScalesStorageEngineLocalStorage>();
 
 this.scaleArray.add(this.scalesStorageEngineArray);
+this.scaleLocalStorage.add(this.scalesStorageEngineLocalStorage);
 
-console.log('Общий вес: ' + this.scaleArray.getSumScale() + 'г');
-console.log('На весах есть: ' + this.scaleArray.getNameList());
 
-// class Apple extends Product { }
-// class Tomato extends Product { }
-// class Orange extends Product { }
+console.log('Общий вес в массиве: ' + this.scaleArray.getSumScale() + 'г');
+console.log('На весах в массиве есть: ' + this.scaleArray.getNameList());
 
-// var scale: Scales = new Scales();
-
-// var apple1: Apple = new Apple('Любимое', 110);
-// var apple2: Apple = new Apple('Минское', 90);
-
-// var tomato1: Tomato = new Tomato('Сливка', 50);
-// var tomato2: Tomato = new Tomato('Белорусские', 70);
-
-// var orange1: Orange = new Orange('Orange1', 120);
-// var orange2: Orange = new Orange('Orange2', 220);
-
-// scale.add(apple1);
-// scale.add(apple2);
-// scale.add(tomato1);
-// scale.add(tomato2);
-// scale.add(orange1);
-// scale.add(orange2);
-
-// console.log('Общий вес: ' + scale.getSumScale() + 'г');
-// console.log('На весах есть: ' + scale.getNameList());
-
+console.log('Общий вес в localStorage: ' + this.scaleLocalStorage.getSumScale() + 'г');
+console.log('На весах в localStorage есть: ' + this.scaleLocalStorage.getNameList());
