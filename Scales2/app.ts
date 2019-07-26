@@ -9,7 +9,7 @@ class Scales {
         this.productsArray.push(product);
     }
     getSumScale(): number {
-        let productsWeight = 0;
+        let productsWeight: number = 0;
         this.productsArray.forEach((product) => {
             productsWeight += product.getScale();
         })
