@@ -6,31 +6,27 @@ interface IStorageEngine {
 
 class Scales<StorageEngine extends IStorageEngine> {
 
-    storageEngineArray: StorageEngine[];
+    storageEngine: StorageEngine;
 
     constructor() {
-        this.storageEngineArray = [];
+        this.storageEngine = null;
     }
 
     add(storageEngine: StorageEngine) {
-        this.storageEngineArray.push(storageEngine);
+        this.storageEngine = storageEngine;
     }
     getSumScale(): number {
-        let productsWeight = 0;
-        this.storageEngineArray.forEach((storageEngine: StorageEngine) => {
-            for (var i = 0; i < storageEngine.getCount(); i++) {
-                productsWeight += storageEngine.getItem(i).getScale();
-            }
-        })
+        let productsWeight: number = 0;
+        for (var i = 0; i < this.storageEngine.getCount(); i++) {
+            productsWeight += this.storageEngine.getItem(i).getScale();
+        }
         return productsWeight;
     }
     getNameList(): string[] {
         let productsNameList: string[] = [];
-        this.storageEngineArray.forEach((storageEngine: StorageEngine) => {
-            for (var i = 0; i < storageEngine.getCount(); i++) {
-                productsNameList.push(storageEngine.getItem(i).getName());
-            }
-        })
+        for (var i = 0; i < this.storageEngine.getCount(); i++) {
+            productsNameList.push(this.storageEngine.getItem(i).getName());
+        }
         return productsNameList;
     }
 }

@@ -1,26 +1,22 @@
 var Scales = /** @class */ (function () {
     function Scales() {
-        this.storageEngineArray = [];
+        this.storageEngine = null;
     }
     Scales.prototype.add = function (storageEngine) {
-        this.storageEngineArray.push(storageEngine);
+        this.storageEngine = storageEngine;
     };
     Scales.prototype.getSumScale = function () {
         var productsWeight = 0;
-        this.storageEngineArray.forEach(function (storageEngine) {
-            for (var i = 0; i < storageEngine.getCount(); i++) {
-                productsWeight += storageEngine.getItem(i).getScale();
-            }
-        });
+        for (var i = 0; i < this.storageEngine.getCount(); i++) {
+            productsWeight += this.storageEngine.getItem(i).getScale();
+        }
         return productsWeight;
     };
     Scales.prototype.getNameList = function () {
         var productsNameList = [];
-        this.storageEngineArray.forEach(function (storageEngine) {
-            for (var i = 0; i < storageEngine.getCount(); i++) {
-                productsNameList.push(storageEngine.getItem(i).getName());
-            }
-        });
+        for (var i = 0; i < this.storageEngine.getCount(); i++) {
+            productsNameList.push(this.storageEngine.getItem(i).getName());
+        }
         return productsNameList;
     };
     return Scales;
@@ -87,22 +83,4 @@ console.log('Общий вес в массиве: ' + this.scaleArray.getSumScal
 console.log('На весах в массиве есть: ' + this.scaleArray.getNameList());
 console.log('Общий вес в localStorage: ' + this.scaleLocalStorage.getSumScale() + 'г');
 console.log('На весах в localStorage есть: ' + this.scaleLocalStorage.getNameList());
-// class Apple extends Product { }
-// class Tomato extends Product { }
-// class Orange extends Product { }
-// var scale: Scales = new Scales();
-// var apple1: Apple = new Apple('Любимое', 110);
-// var apple2: Apple = new Apple('Минское', 90);
-// var tomato1: Tomato = new Tomato('Сливка', 50);
-// var tomato2: Tomato = new Tomato('Белорусские', 70);
-// var orange1: Orange = new Orange('Orange1', 120);
-// var orange2: Orange = new Orange('Orange2', 220);
-// scale.add(apple1);
-// scale.add(apple2);
-// scale.add(tomato1);
-// scale.add(tomato2);
-// scale.add(orange1);
-// scale.add(orange2);
-// console.log('Общий вес: ' + scale.getSumScale() + 'г');
-// console.log('На весах есть: ' + scale.getNameList());
 //# sourceMappingURL=app.js.map
